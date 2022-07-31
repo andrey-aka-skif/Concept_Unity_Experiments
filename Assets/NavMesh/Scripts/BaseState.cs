@@ -26,26 +26,8 @@ namespace Assets.NavMesh
 
         public abstract void Update();
 
-        protected Vector3 _destination;
-
-        protected Vector3 GetNextRndPosition(float distance)
-        {
-            const float from = 0;
-            const float to = 180;
-
-            Vector3 direction = Vector3.forward;
-
-            var random = new System.Random();
-            float angle = (float)(random.NextDouble() * (to - from) + from);
-
-            direction = Quaternion.Euler(0, angle, 0) * direction;
-
-            return _sheep.Position + direction * distance;
-        }
-
         protected Vector3 GetNextRndPositionSafely(float distance)
         {
-            //Debug.Log("Ищем путь");
             const int limit = 25;
             Vector3 destination = Vector3.zero;
             int counter = 0;
@@ -55,13 +37,10 @@ namespace Assets.NavMesh
                 counter++;
                 if (counter > limit)
                 {
-                    //throw new System.OverflowException();
-                    //Debug.Log(_sheep.Position);
                     return _sheep.Position;
                 }
             }
 
-            //Debug.Log(destination);
             return destination;
         }
 
@@ -93,14 +72,5 @@ namespace Assets.NavMesh
                                                  path);
             return path.status == NavMeshPathStatus.PathComplete;
         }
-
-        /*
-        protected bool IsPathCompleted()
-        {
-            const float eps = 0.1f;
-
-            return (_destination - _sheep.Position).magnitude < eps;
-        }
-        */
     }
 }
