@@ -7,20 +7,20 @@ namespace GroundCheck
     /// </summary>
     public class SurfaceSensor : MonoBehaviour
     {
-        private float _checkDistance = 1.0f;
-        private LayerMask _checkLayerMask = ~0;
+        private float _distance = 1.0f;
+        private LayerMask _layerMask = ~0;
 
-        public void Init(float checkDistance, LayerMask checkLayerMask)
+        public void Init(float distance, LayerMask layerMask)
         {
-            _checkDistance = checkDistance;
-            _checkLayerMask = checkLayerMask;
+            _distance = distance;
+            _layerMask = layerMask;
         }
 
-        public bool IsGrounded =>
+        public bool IsNearSurface =>
             Physics.Raycast(
                 transform.position,
                 (-1) * transform.up,
-                _checkDistance,
-                _checkLayerMask);
+                _distance,
+                _layerMask);
     }
 }

@@ -4,13 +4,13 @@ namespace GroundCheck
 {
     public class GroundChecker : MonoBehaviour
     {
-        [SerializeField] private float _checkDistance = 0.2f;
-        [SerializeField] private LayerMask _checkLayerMask = ~0;
+        [SerializeField] private float _distance = 0.2f;
+        [SerializeField] private LayerMask _layerMask = ~0;
 
 #if UNITY_EDITOR
         [Header("Debug.DrawRay")]
-        [SerializeField] private Color _groundHitColor = Color.green;
-        [SerializeField] private Color _groundMissColor = Color.red;
+        [SerializeField] private Color _hitColor = Color.green;
+        [SerializeField] private Color _missColor = Color.red;
 #endif
 
         private SurfaceSensor[] _sensors;
@@ -21,7 +21,7 @@ namespace GroundCheck
             {
                 foreach (var sensor in _sensors)
                 {
-                    if (sensor.IsGrounded)
+                    if (sensor.IsNearSurface)
                         return true;
                 }
                 return false;
@@ -33,12 +33,12 @@ namespace GroundCheck
             _sensors = GetComponentsInChildren<SurfaceSensor>();
 
             foreach (var sensor in _sensors)
-                sensor.Init(_checkDistance, _checkLayerMask);
+                sensor.Init(_distance, _layerMask);
 
 #if UNITY_EDITOR
             SurfaceSensorDebugDrawer[] drawers = GetComponentsInChildren<SurfaceSensorDebugDrawer>();
             foreach (var drawer in drawers)
-                drawer.Init(_groundHitColor, _groundMissColor);
+                drawer.Init(_distance, _hitColor, _missColor);
 #endif
         }
     }

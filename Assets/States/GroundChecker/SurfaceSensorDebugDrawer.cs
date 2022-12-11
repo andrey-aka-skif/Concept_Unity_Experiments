@@ -12,20 +12,22 @@ namespace GroundCheck
     {
         private SurfaceSensor _sensor;
 
-        private Color _groundHitColor = Color.green;
-        private Color _groundMissColor = Color.red;
+        private float _distance;
+        private Color _hitColor = Color.green;
+        private Color _missColor = Color.red;
 
-        public void Init(Color groundHitColor, Color groundMissColor)
+        public void Init(float distance, Color hitColor, Color missColor)
         {
-            _groundHitColor = groundHitColor;
-            _groundMissColor = groundMissColor;
+            _distance = distance;
+            _hitColor = hitColor;
+            _missColor = missColor;
         }
 
         private SurfaceSensor Sensor
         {
             get
             {
-                if(_sensor == null)
+                if (_sensor == null)
                     _sensor = GetComponent<SurfaceSensor>();
 
                 return _sensor;
@@ -34,10 +36,10 @@ namespace GroundCheck
 
         private void OnDrawGizmos()
         {
-            if (Sensor.IsGrounded)
-                Debug.DrawRay(transform.position, (-1) * transform.up, _groundHitColor);
+            if (Sensor.IsNearSurface)
+                Debug.DrawRay(transform.position, (-1) * _distance * transform.up, _hitColor);
             else
-                Debug.DrawRay(transform.position, (-1) * transform.up, _groundMissColor);
+                Debug.DrawRay(transform.position, (-1) * _distance * transform.up, _missColor);
         }
     }
 #endif
