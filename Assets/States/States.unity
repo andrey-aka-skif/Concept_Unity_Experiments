@@ -343,12 +343,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3227f67529c2d540954dfebb5fae718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _checkDistance: 0.2
-  _checkLayerMask:
+  _distance: 0.4
+  _layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  _groundHitColor: {r: 0, g: 1, b: 0, a: 1}
-  _groundMissColor: {r: 1, g: 0, b: 0, a: 1}
+  _hitColor: {r: 0, g: 1, b: 0, a: 1}
+  _missColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &1114520750
 Transform:
   m_ObjectHideFlags: 0
