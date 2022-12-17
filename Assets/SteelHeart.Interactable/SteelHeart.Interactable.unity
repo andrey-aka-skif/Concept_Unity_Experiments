@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3298b9be61658054eaa5d52a1454041c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 1720762964}
+  _source: {fileID: 1720762964}
 --- !u!1 &1478253707
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,7 +654,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!95 &1720762959
 Animator:
   serializedVersion: 4
@@ -762,7 +762,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c327b03a2daff4e8ce0fa4c86db547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delayed: 1
 --- !u!65 &1720762965
 BoxCollider:
   m_ObjectHideFlags: 0

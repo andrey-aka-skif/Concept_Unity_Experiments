@@ -2,6 +2,6 @@
 {
     public interface IInteractable
     {
-        void DoAction();
+        void Interact();
     }
 }

@@ -10,7 +10,7 @@ namespace SteelHeart.Interactable
                 return;
 
             if (other.transform.TryGetComponent(out IInteractable interactable))
-                interactable.DoAction();
+                interactable.Interact();
         }
     }
 }

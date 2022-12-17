@@ -1,18 +1,29 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace SteelHeart.Interactable
 {
     public class EventsCatcher : MonoBehaviour
     {
-        [SerializeField] private LiftButton _button;
+        [SerializeField] private AbstractActivatedSource _source;
 
-        private void OnButtonPush() =>
-            Debug.Log("Нажата целевая кнопка");
+        private void OnActivated(Action action)
+        {
+            StartCoroutine(Timer(action));
+        }
+
+        IEnumerator Timer(Action action)
+        {
+            yield return new WaitForSeconds(10);
+
+            action?.Invoke();
+        }
 
         private void OnEnable() =>
-            _button.Activated += OnButtonPush;
+            _source.ActivatedWithCallback += OnActivated;
 
         private void OnDisable() =>
-            _button.Activated -= OnButtonPush;
+            _source.ActivatedWithCallback -= OnActivated;
     }
 }
