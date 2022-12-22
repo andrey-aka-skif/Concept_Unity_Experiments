@@ -25,10 +25,15 @@ namespace SteelHeart.Interactable
 
         public float PositionInPercents { get; protected set; }
 
-        public virtual void Start() { }
+        public virtual void Start()
+        {
+            Debug.Log(GetType().Name);
+        }
         public virtual void Stop() { }
         public abstract void Update();
 
+        public virtual void OnDoorsOpen() { }
+        public virtual void OnDoorsClose() { }
         public virtual void OnCallToUp() { }
         public virtual void OnCallToDown() { }
         public virtual void OnCallMove() { }

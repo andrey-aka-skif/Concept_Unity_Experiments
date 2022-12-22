@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace SteelHeart.Interactable
 {
+    [RequireComponent(typeof(Animator))]
     public class Lift : MonoBehaviour, IStateSwitcher
     {
         [SerializeField] private float _speed = 1f;
@@ -22,13 +23,21 @@ namespace SteelHeart.Interactable
         private float _timeToEndPoint;
         private float _elapsedTime;
 
+        public Animator _animator;
+
         private void Start()
         {
+            _animator = GetComponent<Animator>();
+
+            _platform.position = _downPoint.position;
+
             _states = new List<BaseLiftState>()
             {
-                new MiddleIdleState(this, _speed, _upPoint, _downPoint, _platform),
-                new MovingDownState(this, _speed, _upPoint, _downPoint, _platform),
-                new DownedState(this, _speed, _upPoint, _downPoint, _platform),
+                new ClosedDoorsState(this, _speed, _upPoint, _downPoint, _platform),
+                new OpenedDoorsState(this, _speed, _upPoint, _downPoint, _platform),
+                new OpeningDoorsState(this, _speed, _upPoint, _downPoint, _platform, _animator),
+                new ClosingDoorsState(this, _speed, _upPoint, _downPoint, _platform),
+                new MovingState(this, _speed, _upPoint, _downPoint, _platform)
             };
 
             _currentState = _states[0];
@@ -59,14 +68,20 @@ namespace SteelHeart.Interactable
         private void Update()
         {
             if (Input.GetKey(KeyCode.Space))
-                _currentState.OnCallMove();
+                OnCallMove();
 
             if (Input.GetKey(KeyCode.UpArrow))
-                _currentState.OnCallToUp();
+                OnCallToUp();
 
             if (Input.GetKey(KeyCode.DownArrow))
-                _currentState.OnCallToDown();
+                OnCallToDown();
         }
+
+        public void OnDoorsOpen() =>
+            _currentState.OnDoorsOpen();
+
+        public void OnDoorsClose() =>
+            _currentState.OnDoorsClose();
 
         private void GoUp()
         {

@@ -2,9 +2,9 @@
 
 namespace SteelHeart.Interactable
 {
-    public class MovingDownState : BaseLiftState
+    public class MovingState : BaseLiftState
     {
-        public MovingDownState(IStateSwitcher switcher,
+        public MovingState(IStateSwitcher switcher,
                                float speed,
                                Transform upPoint,
                                Transform downPoint,
