@@ -268,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _color: {r: 1, g: 1, b: 0, a: 1}
   _wireframe: 1
-  _rect: {x: 1, y: 0.1, z: 1}
+  _rect: {x: 0.95, y: 0.1, z: 0.95}
 --- !u!1 &826961956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,6 +1122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2046490615}
   - component: {fileID: 2046490616}
+  - component: {fileID: 2046490618}
   - component: {fileID: 2046490614}
   - component: {fileID: 2046490617}
   m_Layer: 0
@@ -1172,7 +1173,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046490613}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d8e34776143e647b5bf3f5e92a4eb6, type: 3}
   m_Name: 
@@ -1184,7 +1185,8 @@ MonoBehaviour:
   _upPoint: {fileID: 1736108459}
   _downPoint: {fileID: 826961958}
   _platform: {fileID: 559530016}
-  _animator: {fileID: 0}
+  _hasCallToUp: 0
+  _hasCallToDown: 0
 --- !u!95 &2046490617
 Animator:
   serializedVersion: 4
@@ -1205,3 +1207,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2046490618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046490613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4914756311c452144a1bbaf8d4e81e8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 1
+  _upPoint: {fileID: 1736108459}
+  _downPoint: {fileID: 826961958}
+  _platform: {fileID: 559530016}
