@@ -20,10 +20,12 @@ namespace SteelHeart.Interactable
         private List<BaseLiftState> _states;
         private BaseLiftState _currentState;
 
-        private float _timeToEndPoint;
-        private float _elapsedTime;
+        private Animator _animator;
 
-        public Animator _animator;
+        public bool _hasCallToUp = false;
+        public bool _hasCallToDown = false;
+
+        public enum Direction { none, up, down}
 
         private void Start()
         {
@@ -33,11 +35,11 @@ namespace SteelHeart.Interactable
 
             _states = new List<BaseLiftState>()
             {
-                new ClosedDoorsState(this, _speed, _upPoint, _downPoint, _platform),
-                new OpenedDoorsState(this, _speed, _upPoint, _downPoint, _platform),
-                new OpeningDoorsState(this, _speed, _upPoint, _downPoint, _platform, _animator),
-                new ClosingDoorsState(this, _speed, _upPoint, _downPoint, _platform),
-                new MovingState(this, _speed, _upPoint, _downPoint, _platform)
+                new ClosedDoorsState(this, this, _speed, _upPoint, _downPoint, _platform, _animator),
+                new OpenedDoorsState(this, this, _speed, _upPoint, _downPoint, _platform, _animator),
+                new OpeningDoorsState(this, this, _speed, _upPoint, _downPoint, _platform, _animator),
+                new ClosingDoorsState(this, this, _speed, _upPoint, _downPoint, _platform, _animator),
+                new MovingState(this, this, _speed, _upPoint, _downPoint, _platform, _animator)
             };
 
             _currentState = _states[0];
@@ -49,11 +51,6 @@ namespace SteelHeart.Interactable
             _callToUpButton.Activated += OnCallToUp;
             _callToDownButton.Activated += OnCallToDown;
             _moveButton.Activated += OnCallMove;
-
-            _elapsedTime = 0;
-
-            float distance = Vector3.Distance(_downPoint.position, _upPoint.position);
-            _timeToEndPoint = distance / _speed;
         }
 
         private void OnCallMove() =>
@@ -75,36 +72,13 @@ namespace SteelHeart.Interactable
 
             if (Input.GetKey(KeyCode.DownArrow))
                 OnCallToDown();
+
+            _currentState.Update();
         }
 
-        public void OnDoorsOpen() =>
-            _currentState.OnDoorsOpen();
-
-        public void OnDoorsClose() =>
-            _currentState.OnDoorsClose();
-
-        private void GoUp()
+        private void OnAnimationEvent(string param)
         {
-            _elapsedTime += Time.deltaTime;
-
-            float elapsedPercentage = _elapsedTime / _timeToEndPoint;
-
-            if (true)
-                _platform.position = Vector3.Lerp(_downPoint.position, _upPoint.position, elapsedPercentage);
-            else
-                _platform.position = Vector3.Lerp(_upPoint.position, _downPoint.position, elapsedPercentage);
-
-            if (elapsedPercentage >= 1)
-            {
-                _elapsedTime = 0;
-            }
-        }
-
-        private void SetupPath(Transform target)
-        {
-            _elapsedTime = 0;
-            float distance = Vector3.Distance(_platform.position, target.position);
-            _timeToEndPoint = distance / _speed;
+            _currentState.OnAnimationEvent(param);
         }
 
         public void Switch<T>() where T : BaseLiftState
