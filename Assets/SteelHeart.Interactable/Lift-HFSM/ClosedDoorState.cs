@@ -18,8 +18,6 @@ namespace SteelHeart.HFSM
 
         protected override void OnEnter()
         {
-            Debug.Log("ClosedDoorState OnEnter");
-
             CheckCalls();
         }
 
@@ -36,20 +34,16 @@ namespace SteelHeart.HFSM
                     SwitchState(Factory.GetSate<OpeningDoorState>());
 
                 if (Ctx.HasCallToUp)
-                    Debug.Log("Едем вверх");
+                    SwitchState(Factory.GetSate<MovingState>());
             }
 
             if (Ctx.UpLevel)
             {
                 if (Ctx.HasCallToUp)
-                {
-                    // открыть дверь
-                }
+                    SwitchState(Factory.GetSate<OpeningDoorState>());
 
                 if (Ctx.HasCallToDown)
-                {
-                    // едем вниз
-                }
+                    SwitchState(Factory.GetSate<MovingState>());
             }
         }
     }

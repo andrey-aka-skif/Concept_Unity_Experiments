@@ -34,17 +34,20 @@ namespace SteelHeart.HFSM
 
         private void CreateStates()
         {
-            var leveledState = new LeveledState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
-            _states.Add(leveledState.GetType(), leveledState);
+            _states.Add(typeof(ClosedDoorState),
+                        new ClosedDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this));
 
-            var closeDoorState = new ClosedDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
-            _states.Add(closeDoorState.GetType(), closeDoorState);
+            _states.Add(typeof(OpeningDoorState),
+                        new OpeningDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this));
 
-            var openingDoorState = new OpeningDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
-            _states.Add(openingDoorState.GetType(), openingDoorState);
+            _states.Add(typeof(OpenedDoorState),
+                        new OpenedDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this));
 
-            var movingState = new MovingState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
-            _states.Add(movingState.GetType(), movingState);
+            _states.Add(typeof(ClosingDoorState),
+                        new ClosingDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this));
+
+            _states.Add(typeof(MovingState),
+                        new MovingState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this));
         }
 
         public StateMachine GetSate<T>() where T : StateMachine

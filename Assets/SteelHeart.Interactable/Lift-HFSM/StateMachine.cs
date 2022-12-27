@@ -46,6 +46,8 @@ namespace SteelHeart.HFSM
 
         public void EnterState()
         {
+            Debug.Log(GetType());
+
             OnEnter();
             _currentSubState?.EnterState();
         }

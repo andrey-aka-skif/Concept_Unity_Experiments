@@ -2,28 +2,29 @@
 
 namespace SteelHeart.HFSM
 {
-    public class OpeningDoorState : StateMachine
+    public class ClosingDoorState : StateMachine
     {
-        public OpeningDoorState(LiftHFSM currentContext,
+        public ClosingDoorState(LiftHFSM currentContext,
                                 float speed,
                                 Transform upPoint,
                                 Transform downPoint,
                                 Transform platform,
                                 Animator animator,
-                                StatesFactory stateFactory) : base(currentContext, speed, upPoint, downPoint, platform, animator, stateFactory)
+                                StatesFactory stateFactory) 
+            : base(currentContext, speed, upPoint, downPoint, platform, animator, stateFactory)
         {
             IsRootState = true;
         }
 
         protected override void OnEnter()
         {
-            _animator.SetTrigger("Open");
+            _animator.SetTrigger("Close");
         }
 
         protected override void OnGetAnimationEvent(string param)
         {
-            if (param == "opened")
-                SwitchState(Factory.GetSate<OpenedDoorState>());
+            if (param == "closed")
+                SwitchState(Factory.GetSate<ClosedDoorState>());
         }
     }
 }
