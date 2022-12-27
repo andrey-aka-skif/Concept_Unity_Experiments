@@ -5,18 +5,20 @@ namespace SteelHeart.Interactable
     [ExecuteInEditMode]
     public class LiftToolTip : MonoBehaviour
     {
-        [SerializeField] private Color _color = Color.blue;
         [SerializeField] private bool _wireframe = false;
-        [SerializeField] private Vector3 _rect = new(.5f, .5f, .5f);
+        [SerializeField] private Color _gizmosColor = Color.blue;
+        [SerializeField] private Vector3 _gizmosRect = new(.5f, .5f, .5f);
 
         void OnDrawGizmos()
         {
-            Gizmos.color = _color;
+            Gizmos.matrix = transform.localToWorldMatrix;
+
+            Gizmos.color = _gizmosColor;
 
             if (_wireframe)
-                Gizmos.DrawWireCube(transform.position, _rect);
+                Gizmos.DrawWireCube(Vector3.zero, _gizmosRect);
             else
-                Gizmos.DrawCube(transform.position, _rect);
+                Gizmos.DrawCube(Vector3.zero, _gizmosRect);
         }
     }
 }

@@ -266,9 +266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d739710c67abe57488f1ce641e712550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 1, g: 1, b: 0, a: 1}
   _wireframe: 1
-  _rect: {x: 0.95, y: 0.1, z: 0.95}
+  _gizmosColor: {r: 1, g: 1, b: 0, a: 1}
+  _gizmosRect: {x: 0.95, y: 0.2, z: 0.95}
 --- !u!1 &826961956
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,9 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d739710c67abe57488f1ce641e712550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0, g: 0, b: 1, a: 1}
   _wireframe: 0
-  _rect: {x: 0.5, y: 0.5, z: 0.5}
+  _gizmosColor: {r: 0, g: 0, b: 1, a: 1}
+  _gizmosRect: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!4 &826961958
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,9 +1094,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d739710c67abe57488f1ce641e712550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0, g: 0, b: 1, a: 1}
   _wireframe: 0
-  _rect: {x: 0.5, y: 0.5, z: 0.5}
+  _gizmosColor: {r: 0, g: 0, b: 1, a: 1}
+  _gizmosRect: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!4 &1736108459
 Transform:
   m_ObjectHideFlags: 0
@@ -1105,7 +1105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736108457}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.61, z: 0}
+  m_LocalPosition: {x: 0, y: 5.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1148,6 +1148,7 @@ MonoBehaviour:
   _downTip: {fileID: 826961957}
   _platform: {fileID: 559530017}
   _gigmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _gizmosRect: {x: 1, y: 1}
 --- !u!4 &2046490615
 Transform:
   m_ObjectHideFlags: 0
@@ -1156,7 +1157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046490613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: 0}
+  m_LocalPosition: {x: 8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -10,6 +10,7 @@ namespace SteelHeart.Interactable
         [SerializeField] private LiftToolTip _platform;
 
         [SerializeField] private Color _gigmosColor = Color.yellow;
+        [SerializeField] private Vector2 _gizmosRect = new(1f, 1f);
 
         private void Update()
         {
@@ -59,12 +60,17 @@ namespace SteelHeart.Interactable
 
         void OnDrawGizmos()
         {
+            Gizmos.matrix = transform.localToWorldMatrix;
+
             Gizmos.color = _gigmosColor;
 
             Vector3 tipsCenter = (_upTip.transform.position + _downTip.transform.position) / 2;
+            float midleY = tipsCenter.y;
+
             float gizmosHeight = (_upTip.transform.position - _downTip.transform.position).magnitude;
 
-            Gizmos.DrawWireCube(tipsCenter, new Vector3(1, gizmosHeight, 1));
+            Gizmos.DrawWireCube(midleY * Vector3.up,
+                                new Vector3(_gizmosRect.x, gizmosHeight, _gizmosRect.y));
         }
     }
 }
