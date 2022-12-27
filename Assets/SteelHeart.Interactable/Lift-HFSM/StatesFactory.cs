@@ -37,8 +37,11 @@ namespace SteelHeart.HFSM
             var leveledState = new LeveledState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
             _states.Add(leveledState.GetType(), leveledState);
 
-            var closeDoorState = new CloseDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
+            var closeDoorState = new ClosedDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
             _states.Add(closeDoorState.GetType(), closeDoorState);
+
+            var openingDoorState = new OpeningDoorState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
+            _states.Add(openingDoorState.GetType(), openingDoorState);
 
             var movingState = new MovingState(_lift, _speed, _upPoint, _downPoint, _platform, _animator, this);
             _states.Add(movingState.GetType(), movingState);

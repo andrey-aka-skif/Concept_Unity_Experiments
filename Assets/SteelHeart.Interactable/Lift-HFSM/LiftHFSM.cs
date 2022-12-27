@@ -12,30 +12,51 @@ namespace SteelHeart.HFSM
         [SerializeField] private Transform _platform;
 
         private Animator _animator;
-        private StatesFactory _factory;
-        private StateMachine _stateMachine;
 
-        public bool HasCallToUp = false;
-        public bool HasCallToDown = false;
+        private StateMachine _currentState;
+        private StatesFactory _states;
 
-        private void Start()
+        public StateMachine CurrentState
+        {
+            get => _currentState;
+            set => _currentState = value;
+        }
+
+        public bool HasCallToUp { get; set; }
+        public bool HasCallToDown { get; set; }
+
+        private void Awake()
         {
             _platform.position = _downPoint.position;
             _animator = GetComponent<Animator>();
 
-            _factory = new StatesFactory(this, _speed, _upPoint, _downPoint, _platform, _animator);
-
-            _stateMachine = _factory.GetSate<LeveledState>();
-            //_stateMachine.AddSubState(_factory.GetSate<CloseDoorState>());
-            
-            _stateMachine.EnterStateMachine();
+            _states = new StatesFactory(this, _speed, _upPoint, _downPoint, _platform, _animator);
+            _currentState = _states.GetSate<ClosedDoorState>();
+            _currentState.EnterState();
         }
 
-        private void OnCallMove() => _stateMachine.OnCallMove();
+        private void OnCallMove()
+        {
+            if (DownLevel)
+                HasCallToUp = true;
 
-        private void OnCallToDown() => _stateMachine.OnCallToDown();
+            if (UpLevel)
+                HasCallToDown = true;
 
-        private void OnCallToUp() => _stateMachine.OnCallToUp();
+            _currentState.Call();
+        }
+
+        private void OnCallToDown()
+        {
+            HasCallToDown = true;
+            _currentState.Call();
+        }
+
+        private void OnCallToUp()
+        {
+            HasCallToUp = true;
+            _currentState.Call();
+        }
 
         private void Update()
         {
@@ -48,12 +69,38 @@ namespace SteelHeart.HFSM
             if (Input.GetKey(KeyCode.DownArrow))
                 OnCallToDown();
 
-            _stateMachine.UpdateStateMachine();
+            _currentState.UpdateState();
         }
 
-        private void OnAnimationEvent(string param)
+        private void OnAnimationEventHFSM(string param)
         {
-            _stateMachine.OnAnimationEvent(param);
+            _currentState.GetAnimationEvent(param);
+        }
+
+        public bool DownLevel
+        {
+            get
+            {
+                float distanceToDownPoint = Vector3.Distance(_platform.position, _downPoint.position);
+
+                if (distanceToDownPoint < Mathf.Epsilon)
+                    return true;
+
+                return false;
+            }
+        }
+
+        public bool UpLevel
+        {
+            get
+            {
+                float distanceToUpPoint = Vector3.Distance(_platform.position, _upPoint.position);
+
+                if (distanceToUpPoint < Mathf.Epsilon)
+                    return true;
+
+                return false;
+            }
         }
     }
 }

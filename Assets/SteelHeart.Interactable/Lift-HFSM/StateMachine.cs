@@ -6,141 +6,97 @@ namespace SteelHeart.HFSM
 {
     public abstract class StateMachine
     {
-        private StateMachine _currentSuperState;
+        private bool _isRootState = false;
+        private readonly LiftHFSM _ctx;
+        private readonly StatesFactory _factory;
         private StateMachine _currentSubState;
-        //private StateMachine _defaultSubState;
-        //public StateMachine _parent;
-        //private readonly Dictionary<Type, StateMachine> _subStates = new();
+        private StateMachine _currentSuperState;
 
-        protected bool _isRootState = false;
-
-        protected LiftHFSM _lift;
         protected float _speed;
         protected Transform _upPoint;
         protected Transform _downPoint;
         protected Transform _platform;
         protected Animator _animator;
-        protected StatesFactory _factory;
 
-        protected StateMachine(LiftHFSM lift,
+        protected bool IsRootState { set => _isRootState = value; }
+        protected LiftHFSM Ctx => _ctx;
+        protected StatesFactory Factory => _factory;
+
+        protected StateMachine(LiftHFSM currentContext,
                                float speed,
                                Transform upPoint,
                                Transform downPoint,
                                Transform platform,
                                Animator animator,
-                               StatesFactory factory)
+                               StatesFactory stateFactory)
         {
-            _lift = lift;
+            _ctx = currentContext;
+            _factory = stateFactory;
+
             _speed = speed;
             _upPoint = upPoint;
             _downPoint = downPoint;
             _platform = platform;
             _animator = animator;
-            _factory = factory;
-        }
-
-        public void EnterStateMachine()
-        {
-            OnEnter();
-            /*
-            if (_currentSubState == null && _defaultSubState != null)
-            {
-                _currentSubState = _defaultSubState;
-            }
-            */
-            _currentSubState?.EnterStateMachine();
-        }
-
-        public void UpdateStateMachine()
-        {
-            OnUpdate();
-            _currentSubState?.UpdateStateMachine();
-        }
-
-        public void ExitStateMachine()
-        {
-            _currentSubState?.ExitStateMachine();
-            OnExit();
-        }
-
-        public virtual void OnCallMove()
-        {
-            _currentSubState?.OnCallMove();
-        }
-
-        public virtual void OnCallToDown()
-        {
-            _currentSubState?.OnCallToDown();
-        }
-
-        public virtual void OnCallToUp()
-        {
-            _currentSubState?.OnCallToUp();
         }
 
         protected virtual void OnEnter() { }
-
         protected virtual void OnUpdate() { }
-
         protected virtual void OnExit() { }
 
-        /*
-        public void AddSubState(StateMachine subState)
+        public void EnterState()
         {
-            if (_subStates.Count == 0)
-            {
-                _defaultSubState = subState;
-            }
-
-            subState.Parent = this;
-            try
-            {
-                _subStates.Add(subState.GetType(), subState);
-            }
-            catch (ArgumentException)
-            {
-                throw new Exception($"State {this.GetType()} already contains a substate of type {subState.GetType()}");
-            }
-        }
-        */
-
-        public void OnAnimationEvent(string param)
-        {
-            _currentSubState?.OnAnimationEvent(param);
+            OnEnter();
+            _currentSubState?.EnterState();
         }
 
-        //public void Switch<T>() where T : StateMachine
-        //{
-        //    _currentSubState?.ExitStateMachine();
-        //    _currentSubState = _subStates[typeof(T)];
-        //    _currentSubState.EnterStateMachine();
-        //}
-
-        public void SetSuperState(StateMachine state)
+        public void UpdateState()
         {
-            _currentSuperState = state;
+            OnUpdate();
+            _currentSubState?.UpdateState();
         }
 
-        public void SetSubState(StateMachine state)
+        public void ExitState()
         {
-            _currentSubState = state;
-            state.SetSuperState(this);
-        }
-
-        public void Switch(StateMachine newState)
-        {
+            _currentSubState?.ExitState();
             OnExit();
+        }
 
-            newState.EnterStateMachine();
+        protected void SwitchState(StateMachine newState)
+        {
+            ExitState();
+            newState.EnterState();
 
             if (_isRootState)
-            {
-                _currentSuperState.SetSubState(newState);
-            }
-            else if (_currentSuperState != null)
-            {
-                _currentSuperState.SetSubState(newState);
-            }
+                _ctx.CurrentState = newState;
+            else
+                _currentSuperState?.SetSubState(newState);
+        }
+
+        protected void SetSuperState(StateMachine newSuperState)
+        {
+            _currentSuperState = newSuperState;
+        }
+
+        protected void SetSubState(StateMachine newSubState)
+        {
+            _currentSubState = newSubState;
+            newSubState.SetSuperState(this);
+        }
+
+        protected virtual void OnGetAnimationEvent(string param) { }
+        protected virtual void OnCall() { }
+
+        public void GetAnimationEvent(string param)
+        {
+            OnGetAnimationEvent(param);
+            _currentSubState?.GetAnimationEvent(param);
+        }
+
+        public void Call()
+        {
+            OnCall();
+            _currentSubState?.Call();
         }
     }
 }
