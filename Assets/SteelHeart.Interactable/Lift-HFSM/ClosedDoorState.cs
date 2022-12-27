@@ -16,12 +16,7 @@ namespace SteelHeart.HFSM
             IsRootState = true;
         }
 
-        protected override void OnEnter()
-        {
-            CheckCalls();
-        }
-
-        protected override void OnCall()
+        protected override void OnUpdate()
         {
             CheckCalls();
         }
@@ -32,8 +27,7 @@ namespace SteelHeart.HFSM
             {
                 if (Ctx.HasCallToDown)
                     SwitchState(Factory.GetSate<OpeningDoorState>());
-
-                if (Ctx.HasCallToUp)
+                else if (Ctx.HasCallToUp)
                     SwitchState(Factory.GetSate<MovingState>());
             }
 
@@ -41,8 +35,7 @@ namespace SteelHeart.HFSM
             {
                 if (Ctx.HasCallToUp)
                     SwitchState(Factory.GetSate<OpeningDoorState>());
-
-                if (Ctx.HasCallToDown)
+                else if (Ctx.HasCallToDown)
                     SwitchState(Factory.GetSate<MovingState>());
             }
         }
