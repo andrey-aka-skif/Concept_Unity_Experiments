@@ -1,12 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SteelHeart.HFSM
 {
     public class OpenedDoorState : StateMachine
     {
         private float _elapsed;
-        private float _openedTime = 2;
 
         public OpenedDoorState(LiftHFSM currentContext,
                                float speed,
@@ -30,7 +28,7 @@ namespace SteelHeart.HFSM
         {
             _elapsed += Time.deltaTime;
 
-            if (_elapsed < _openedTime)
+            if (_elapsed < Ctx.MinOpenedTime)
                 return;
 
             CheckCalls();

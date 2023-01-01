@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace SteelHeart.HFSM
 {
@@ -6,6 +7,7 @@ namespace SteelHeart.HFSM
     public class LiftHFSM : MonoBehaviour
     {
         [SerializeField] private float _speed = 1f;
+        [SerializeField] private float _minOpenedTime = 2f;
 
         [SerializeField] private Transform _upPoint;
         [SerializeField] private Transform _downPoint;
@@ -24,6 +26,8 @@ namespace SteelHeart.HFSM
 
         public bool HasCallToUp { get; set; }
         public bool HasCallToDown { get; set; }
+
+        public float MinOpenedTime => _minOpenedTime;
 
         private void Awake()
         {
