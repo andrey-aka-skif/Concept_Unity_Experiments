@@ -3,7 +3,7 @@
 namespace SteelHeart.HFSM
 {
     [System.Obsolete]
-    public class LeveledState : StateMachine
+    public class LeveledState : BaseHierarchicalState
     {
         public LeveledState(LiftHFSM lift,
                             Transform upPoint,

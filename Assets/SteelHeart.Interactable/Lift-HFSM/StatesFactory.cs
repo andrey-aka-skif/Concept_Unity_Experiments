@@ -6,7 +6,7 @@ namespace SteelHeart.HFSM
 {
     public class StatesFactory
     {
-        private readonly Dictionary<Type, StateMachine> _states = new();
+        private readonly Dictionary<Type, BaseHierarchicalState> _states = new();
 
         protected LiftHFSM _lift;
         protected Transform _upPoint;
@@ -47,7 +47,7 @@ namespace SteelHeart.HFSM
                         new MovingState(_lift, _upPoint, _downPoint, _platform, _animator, this));
         }
 
-        public StateMachine GetSate<T>() where T : StateMachine
+        public BaseHierarchicalState GetSate<T>() where T : BaseHierarchicalState
         {
             return _states[typeof(T)];
         }

@@ -2,7 +2,7 @@
 
 namespace SteelHeart.HFSM
 {
-    public class OpenedDoorState : StateMachine
+    public class OpenedDoorState : BaseHierarchicalState
     {
         private float _elapsed;
 

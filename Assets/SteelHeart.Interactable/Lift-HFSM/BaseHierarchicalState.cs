@@ -2,13 +2,13 @@
 
 namespace SteelHeart.HFSM
 {
-    public abstract class StateMachine
+    public abstract class BaseHierarchicalState
     {
         private bool _isRootState = false;
         private readonly LiftHFSM _ctx;
         private readonly StatesFactory _factory;
-        private StateMachine _currentSubState;
-        private StateMachine _currentSuperState;
+        private BaseHierarchicalState _currentSubState;
+        private BaseHierarchicalState _currentSuperState;
 
         protected Transform _upPoint;
         protected Transform _downPoint;
@@ -19,7 +19,7 @@ namespace SteelHeart.HFSM
         protected LiftHFSM Ctx => _ctx;
         protected StatesFactory Factory => _factory;
 
-        protected StateMachine(LiftHFSM currentContext,
+        protected BaseHierarchicalState(LiftHFSM currentContext,
                                Transform upPoint,
                                Transform downPoint,
                                Transform platform,
@@ -59,7 +59,7 @@ namespace SteelHeart.HFSM
             OnExit();
         }
 
-        protected void SwitchState(StateMachine newState)
+        protected void SwitchState(BaseHierarchicalState newState)
         {
             ExitState();
             newState.EnterState();
@@ -70,12 +70,12 @@ namespace SteelHeart.HFSM
                 _currentSuperState?.SetSubState(newState);
         }
 
-        protected void SetSuperState(StateMachine newSuperState)
+        protected void SetSuperState(BaseHierarchicalState newSuperState)
         {
             _currentSuperState = newSuperState;
         }
 
-        protected void SetSubState(StateMachine newSubState)
+        protected void SetSubState(BaseHierarchicalState newSubState)
         {
             _currentSubState = newSubState;
             newSubState.SetSuperState(this);

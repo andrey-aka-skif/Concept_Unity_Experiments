@@ -2,7 +2,7 @@
 
 namespace SteelHeart.HFSM
 {
-    public class MovingState : StateMachine
+    public class MovingState : BaseHierarchicalState
     {
         private float _elapsed;
         private float _timeToEndPoint;

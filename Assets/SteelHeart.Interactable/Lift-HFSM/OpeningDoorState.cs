@@ -2,7 +2,7 @@
 
 namespace SteelHeart.HFSM
 {
-    public class OpeningDoorState : StateMachine
+    public class OpeningDoorState : BaseHierarchicalState
     {
         public OpeningDoorState(LiftHFSM currentContext,
                                 Transform upPoint,

@@ -15,10 +15,10 @@ namespace SteelHeart.HFSM
 
         private Animator _animator;
 
-        private StateMachine _currentState;
+        private BaseHierarchicalState _currentState;
         private StatesFactory _states;
 
-        public StateMachine CurrentState
+        public BaseHierarchicalState CurrentState
         {
             get => _currentState;
             set => _currentState = value;
