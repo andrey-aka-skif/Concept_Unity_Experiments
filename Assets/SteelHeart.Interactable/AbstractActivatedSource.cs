@@ -8,12 +8,16 @@ namespace SteelHeart.Interactable
         public event Action Activated;
         public event Action<Action> ActivatedWithCallback;
 
-        public virtual void Interact()
+        public void Interact()
         {
-            Activated?.Invoke();
-            ActivatedWithCallback?.Invoke(CompleteHandler);
+            if (TryInteract())
+            {
+                Activated?.Invoke();
+                ActivatedWithCallback?.Invoke(CompleteHandler);
+            }
         }
 
+        protected virtual bool TryInteract() => true;
         protected virtual void CompleteHandler() { }
     }
 }
