@@ -6,13 +6,12 @@ namespace SteelHeart.HFSM
     public class LeveledState : StateMachine
     {
         public LeveledState(LiftHFSM lift,
-                            float speed,
                             Transform upPoint,
                             Transform downPoint,
                             Transform platform,
                             Animator animator,
                             StatesFactory factory) 
-            : base(lift, speed, upPoint, downPoint, platform, animator, factory)
+            : base(lift, upPoint, downPoint, platform, animator, factory)
         {
             IsRootState = true;
         }

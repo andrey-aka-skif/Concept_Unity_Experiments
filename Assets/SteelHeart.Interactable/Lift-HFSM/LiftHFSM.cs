@@ -27,6 +27,7 @@ namespace SteelHeart.HFSM
         public bool HasCallToUp { get; set; }
         public bool HasCallToDown { get; set; }
 
+        public float Speed => _speed;
         public float MinOpenedTime => _minOpenedTime;
 
         private void Awake()
@@ -34,7 +35,7 @@ namespace SteelHeart.HFSM
             _platform.position = _downPoint.position;
             _animator = GetComponent<Animator>();
 
-            _states = new StatesFactory(this, _speed, _upPoint, _downPoint, _platform, _animator);
+            _states = new StatesFactory(this, _upPoint, _downPoint, _platform, _animator);
             _currentState = _states.GetSate<ClosedDoorState>();
             _currentState.EnterState();
         }

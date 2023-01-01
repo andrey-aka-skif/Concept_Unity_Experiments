@@ -7,13 +7,12 @@ namespace SteelHeart.HFSM
         private float _elapsed;
 
         public OpenedDoorState(LiftHFSM currentContext,
-                               float speed,
                                Transform upPoint,
                                Transform downPoint,
                                Transform platform,
                                Animator animator,
                                StatesFactory stateFactory)
-            : base(currentContext, speed, upPoint, downPoint, platform, animator, stateFactory)
+            : base(currentContext, upPoint, downPoint, platform, animator, stateFactory)
         {
             IsRootState = true;
         }

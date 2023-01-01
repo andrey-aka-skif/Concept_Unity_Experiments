@@ -5,13 +5,12 @@ namespace SteelHeart.HFSM
     public class ClosedDoorState : StateMachine
     {
         public ClosedDoorState(LiftHFSM lift,
-                              float speed,
                               Transform upPoint,
                               Transform downPoint,
                               Transform platform,
                               Animator animator,
                               StatesFactory factory)
-            : base(lift, speed, upPoint, downPoint, platform, animator, factory)
+            : base(lift, upPoint, downPoint, platform, animator, factory)
         {
             IsRootState = true;
         }

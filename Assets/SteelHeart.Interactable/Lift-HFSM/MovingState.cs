@@ -9,12 +9,11 @@ namespace SteelHeart.HFSM
         private bool _isMoveUp;
 
         public MovingState(LiftHFSM lift,
-                           float speed,
                            Transform upPoint,
                            Transform downPoint,
                            Transform platform,
                            Animator animator, 
-                           StatesFactory factory) : base(lift, speed, upPoint, downPoint, platform, animator, factory)
+                           StatesFactory factory) : base(lift, upPoint, downPoint, platform, animator, factory)
         {
             IsRootState = true;
         }
@@ -42,7 +41,7 @@ namespace SteelHeart.HFSM
         {
             _elapsed = 0;
             float distance = Vector3.Distance(_downPoint.position, _upPoint.position);
-            _timeToEndPoint = distance / _speed;
+            _timeToEndPoint = distance / Ctx.Speed;
         }
 
         private void CheckDirection()

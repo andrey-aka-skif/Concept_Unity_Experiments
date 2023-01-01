@@ -10,7 +10,6 @@ namespace SteelHeart.HFSM
         private StateMachine _currentSubState;
         private StateMachine _currentSuperState;
 
-        protected float _speed;
         protected Transform _upPoint;
         protected Transform _downPoint;
         protected Transform _platform;
@@ -21,7 +20,6 @@ namespace SteelHeart.HFSM
         protected StatesFactory Factory => _factory;
 
         protected StateMachine(LiftHFSM currentContext,
-                               float speed,
                                Transform upPoint,
                                Transform downPoint,
                                Transform platform,
@@ -31,7 +29,6 @@ namespace SteelHeart.HFSM
             _ctx = currentContext;
             _factory = stateFactory;
 
-            _speed = speed;
             _upPoint = upPoint;
             _downPoint = downPoint;
             _platform = platform;

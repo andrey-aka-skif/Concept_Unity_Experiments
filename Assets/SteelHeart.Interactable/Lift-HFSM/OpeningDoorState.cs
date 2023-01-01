@@ -5,12 +5,11 @@ namespace SteelHeart.HFSM
     public class OpeningDoorState : StateMachine
     {
         public OpeningDoorState(LiftHFSM currentContext,
-                                float speed,
                                 Transform upPoint,
                                 Transform downPoint,
                                 Transform platform,
                                 Animator animator,
-                                StatesFactory stateFactory) : base(currentContext, speed, upPoint, downPoint, platform, animator, stateFactory)
+                                StatesFactory stateFactory) : base(currentContext, upPoint, downPoint, platform, animator, stateFactory)
         {
             IsRootState = true;
         }
