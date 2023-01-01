@@ -705,7 +705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1269377409
 Transform:
   m_ObjectHideFlags: 0
@@ -743,7 +743,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1478253709}
-  - component: {fileID: 1478253708}
   - component: {fileID: 1478253710}
   m_Layer: 0
   m_Name: ErsatzPlayer
@@ -752,19 +751,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!135 &1478253708
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478253707}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1478253709
 Transform:
   m_ObjectHideFlags: 0
@@ -792,6 +778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc0e3ee6917f60e42b649910d335ce35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _searchRadius: 1.02
+  _gizmosColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!1 &1685520951
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,7 +893,6 @@ GameObject:
   - component: {fileID: 1720762959}
   - component: {fileID: 1720762958}
   - component: {fileID: 1720762964}
-  - component: {fileID: 1720762963}
   - component: {fileID: 1720762965}
   m_Layer: 0
   m_Name: Button
@@ -1028,18 +1015,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720762956}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1720762963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1720762956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eef1a678192a98c489b0cdcaade6d1fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1720762964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1052,6 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c327b03a2daff4e8ce0fa4c86db547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animationTriggerName: OnPress
 --- !u!65 &1720762965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1121,7 +1097,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2046490615}
-  - component: {fileID: 2046490616}
   - component: {fileID: 2046490618}
   - component: {fileID: 2046490614}
   - component: {fileID: 2046490617}
@@ -1167,27 +1142,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2046490616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046490613}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d8e34776143e647b5bf3f5e92a4eb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 1
-  _callToDownButton: {fileID: 1720762964}
-  _callToUpButton: {fileID: 1720762964}
-  _moveButton: {fileID: 1720762964}
-  _upPoint: {fileID: 1736108459}
-  _downPoint: {fileID: 826961958}
-  _platform: {fileID: 559530016}
-  _hasCallToUp: 0
-  _hasCallToDown: 0
 --- !u!95 &2046490617
 Animator:
   serializedVersion: 4
@@ -1221,6 +1175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1
+  _minOpenedTime: 2
   _upPoint: {fileID: 1736108459}
   _downPoint: {fileID: 826961958}
   _platform: {fileID: 559530016}
