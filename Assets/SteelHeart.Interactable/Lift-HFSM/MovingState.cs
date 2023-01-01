@@ -12,7 +12,7 @@ namespace SteelHeart.HFSM
                            Transform upPoint,
                            Transform downPoint,
                            Transform platform,
-                           Animator animator, 
+                           Animator animator,
                            StatesFactory factory) : base(lift, upPoint, downPoint, platform, animator, factory)
         {
             IsRootState = true;
@@ -58,6 +58,7 @@ namespace SteelHeart.HFSM
             _elapsed += Time.deltaTime;
 
             float elapsedPercentage = _elapsed / _timeToEndPoint;
+            elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
 
             if (_isMoveUp)
                 _platform.position = Vector3.Lerp(_downPoint.position, _upPoint.position, elapsedPercentage);
