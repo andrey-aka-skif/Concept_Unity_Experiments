@@ -328,6 +328,8 @@ GameObject:
   - component: {fileID: 903496774}
   - component: {fileID: 903496773}
   - component: {fileID: 903496772}
+  - component: {fileID: 903496776}
+  - component: {fileID: 903496775}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -413,6 +415,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903496770}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &903496775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903496770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4300b09dd151dce498d016ac850fb6ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &903496776
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903496770}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 3, z: 0.8}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &1015105160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,7 +1201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4914756311c452144a1bbaf8d4e81e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 5
   _minOpenedTime: 2
   _upPoint: {fileID: 1736108459}
   _downPoint: {fileID: 826961958}
